@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Typing Speed Test</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+
+    <!-- Text to type -->
+     
+    <img id="corner-image" src="logo_with_background-removebg-preview.png" alt="Corner Image" />
+
+    <div class="text-box">
+      <p id="display-text"></p>
+    </div>
+    
+    <!-- Input box -->
+    <textarea id="input-box" placeholder="Start typing here..." rows="5"></textarea>
+    
+    <!-- Controls -->
+    <div class="controls">
+      <p>Time: <span id="timer">0</span> seconds</p>
+      <p>WPM: <span id="wpm">0</span></p>
+      <button id="toggle-mode">Switch to Word Mode</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #4d4db0;
+  }
+  
+  .container {
+
+    
+    text-align: center;
+    width: 80%;
+  }
+  
+  .text-box {
+    margin: 20px 0;
+    background-color: #eee;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  #display-text {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 18px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+  }
+  
+  textarea:focus {
+    border-color: #888;
+  }
+  
+  .correct {
+    color: rgb(0, 176, 176);
+  }
+  
+  .incorrect {
+    color: red;
+  }
+  
+  .controls {
+    margin-top: 30px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    background-color: #20058a;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #218838;
+  }
+  
+  #timer, #wpm {
+    color: rgb(185, 255, 22);
+
+    font-size: 28px;
+  }
+
+  #corner-image {
+    position: absolute;
+    top: 10px; /* Adjust to move the image vertically */
+    right: 400px; /* Adjust to move the image horizontally */
+    width: 300px; /* Adjust the size as per your need */
+    height: auto; /* Keep aspect ratio */
+  }
+  

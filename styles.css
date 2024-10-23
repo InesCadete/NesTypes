@@ -79,8 +79,9 @@
   #corner-image {
     position: absolute;
     top: 10px; /* Adjust to move the image vertically */
-    right: 400px; /* Adjust to move the image horizontally */
-    width: 300px; /* Adjust the size as per your need */
+    /* right: 200px; Adjust to move the image horizontally */
+    left: 130px;
+    width: 350px; /* Adjust the size as per your need */
     height: auto; /* Keep aspect ratio */
   }
   

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Typing Test Results</title>
+  <link rel="stylesheet" href="styles.css"> <!-- Link to your main CSS -->
+</head>
+<body>
+  <div class="container">
+    <h1>Your Results</h1>
+
+    <!-- Display results dynamically -->
+    <p>Time: <span id="time-result">0</span> minutes</p>
+    <p>Words Per Minute (WPM): <span id="wpm-result">0</span></p>
+    <p>Accuracy: <span id="accuracy-result">0</span>%</p>
+
+    <!-- Next Test Button -->
+    <button id="retry-button" onclick="startNewTest()">Next Test</button>
+  </div>
+
+  <script>
+    // Simulate loading data (replace with actual data fetching later)
+    document.getElementById("time-result").innerText = "2:30";  // Example of 2 min 30 sec
+    document.getElementById("wpm-result").innerText = "75";     // Example of 75 WPM
+    document.getElementById("accuracy-result").innerText = "95"; // Example of 95% accuracy
+
+    // Function to handle starting a new test
+    function startNewTest() {
+      window.location.href = "index.html"; // Redirect to the main test page
+    }
+  </script>
+</body>
+</html>

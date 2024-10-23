@@ -69,6 +69,19 @@
   button:hover {
     background-color: #218838;
   }
+/* New button styles for retry button */
+#retry-button {
+  padding: 12px 25px; /* Adjust padding if needed */
+  background-color: #d9534f; /* Different background color for the retry button */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px; /* Add margin to separate it from other elements */
+}
+  
+
+
   
   #timer, #wpm {
     color: rgb(185, 255, 22);
@@ -84,4 +97,15 @@
     width: 350px; /* Adjust the size as per your need */
     height: auto; /* Keep aspect ratio */
   }
+
+
+  #result-image {
+    position: absolute;
+    top: 10px; /* Adjust to move the image vertically */
+    /* right: 200px; Adjust to move the image horizontally */
+    left: 130px;
+    width: 650px; /* Adjust the size as per your need */
+    height: auto; /* Keep aspect ratio */
+  }
+  
   

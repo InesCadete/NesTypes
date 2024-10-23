@@ -23,7 +23,18 @@ const timerElement = document.getElementById("timer");
 const wpmElement = document.getElementById("wpm");
 const toggleButton = document.getElementById("toggle-mode");
 
-let currentText = ""; // The text currently being typed
+//----------------------------THISSSSSSS-----------------
+
+const testSection = document.getElementById("test-section");
+const resultsSection = document.getElementById("results-section");
+const retryButton = document.getElementById("retry-button");
+
+// let currentText = ""; // The text currently being typed
+
+let currentText = generateText(); // Generate text to be typed
+displayText.innerText = currentText; // Display the generated text
+
+
 let timer = 0; // Timer in seconds
 let wordCount = 0; // Count of correctly typed words
 
@@ -38,8 +49,7 @@ function generateText(wordCount = 10) {
 
 // Start timer and reset everything
 function startTest() {
-    currentText = generateText(); // Generate text to be typed
-    displayText.innerText = currentText; // Display the generated text
+
     inputOverlay.value = ""; // Reset input box
     timer = 0; // Reset timer
     wordCount = 0; // Reset word count
@@ -54,7 +64,10 @@ function startTest() {
 let testStarted = false;
 
 function handleTyping(event) {
-    if (!testStarted) {
+
+    const key = event.data;
+
+    if (!testStarted && key && key.trim() !== "") {
         startTest(); // Start the test when the first key is pressed
         testStarted = true;
     }
@@ -68,6 +81,7 @@ function handleTyping(event) {
         if (i < typedText.length) {
             if (typedText[i] === currentText[i]) {
                 highlightedText += `<span class="correct">${currentText[i]}</span>`;
+            
             } else {
                 highlightedText += `<span class="incorrect">${currentText[i]}</span>`;
                 isComplete = false; // Mark as incomplete if there's an error
@@ -90,8 +104,8 @@ function handleTyping(event) {
         completeTest();
     }
 
-    // Scroll to ensure that the last 3 lines are visible
-    displayText.scrollTop = displayText.scrollHeight;
+    // // Scroll to ensure that the last 3 lines are visible
+    // displayText.scrollTop = displayText.scrollHeight;
 }
 
 // Update the timer every second
@@ -110,17 +124,93 @@ function calculateWPM() {
     wpmElement.innerText = wpm; // Display WPM
 }
 
+// // Complete the test and display results
+// function completeTest() {
+//     clearInterval(interval); // Stop the timer
+//     const minutes = Math.floor(timer / 60); // Calculate minutes
+//     const seconds = timer % 60; // Calculate remaining seconds
+
+//     // Display final results
+//     results.innerHTML = `Time: ${minutes}m ${seconds}s | WPM: ${wpmElement.innerText}`;
+//     results.style.display = "block"; // Show results
+//     resultImage.style.display = "block"; // Show result image
+
+// //----------------------------THISSSSSSS-----------------
+
+//     // Display final results
+//     testSection.style.display = "none"; // Hide test section
+//     resultsSection.style.display = "block"; // Show results section
+//     document.getElementById("results").innerHTML = `Time: ${minutes}m ${seconds}s | WPM: ${wpmElement.innerText} | Accuracy: ${accuracy}%`;
+
+
+// // Add retry button functionality
+// retryButton.addEventListener("click", startTest);
+// }
+
+
 // Complete the test and display results
 function completeTest() {
     clearInterval(interval); // Stop the timer
     const minutes = Math.floor(timer / 60); // Calculate minutes
     const seconds = timer % 60; // Calculate remaining seconds
 
-    // Display final results
-    results.innerHTML = `Time: ${minutes}m ${seconds}s | WPM: ${wpmElement.innerText}`;
-    results.style.display = "block"; // Show results
-    resultImage.style.display = "block"; // Show result image
+    const typedText = inputOverlay.value;
+    const wordsTyped = typedText.split(" ").filter(word => word.length > 0);
+    const totalWords = currentText.trim().split(" ").length;
+
+    // Calculate accuracy
+    let correctWords = 0;
+    for (let i = 0; i < wordsTyped.length; i++) {
+        if (wordsTyped[i] === currentText.split(" ")[i]) {
+            correctWords++;
+        }
+    }
+    const accuracy = ((correctWords / totalWords) * 100).toFixed(2);
+
+    // Hide test section (text input and words to type)
+    testSection.style.display = "none"; 
+
+    // Show results section and display final results
+    resultsSection.style.display = "block"; 
+    results.innerHTML = `Time: ${minutes}m ${seconds}s | WPM: ${wpmElement.innerText} | Accuracy: ${accuracy}%`;
 }
+
+// Add retry button functionality
+retryButton.addEventListener("click", startTest);
+
+
+
+
+
+
+
+// // Complete the test and display results
+// function completeTest() {
+//     clearInterval(interval); // Stop the timer
+//     const minutes = Math.floor(timer / 60); // Calculate minutes
+//     const seconds = timer % 60; // Calculate remaining seconds
+
+//     const typedText = inputOverlay.value;
+//     const wordsTyped = typedText.split(" ").filter(word => word.length > 0);
+//     const totalWords = currentText.trim().split(" ").length;
+
+//     // Calculate accuracy
+//     let correctWords = 0;
+//     for (let i = 0; i < wordsTyped.length; i++) {
+//         if (wordsTyped[i] === currentText.split(" ")[i]) {
+//             correctWords++;
+//         }
+//     }
+//     const accuracy = ((correctWords / totalWords) * 100).toFixed(2);
+
+//     // Display final results
+//     testSection.style.display = "none"; // Hide test section
+//     resultsSection.style.display = "block"; // Show results section
+//     document.getElementById("results").innerHTML = `Time: ${minutes}m ${seconds}s | WPM: ${wpmElement.innerText} | Accuracy: ${accuracy}%`;
+// }
+
+
+
 
 // Toggle between timed mode and word count mode
 toggleButton.addEventListener("click", () => {

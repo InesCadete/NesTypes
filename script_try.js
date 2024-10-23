@@ -124,6 +124,11 @@ function calculateWPM() {
     wpmElement.innerText = wpm; // Display WPM
 }
 
+function calculateAccuracy() {
+
+    return ((correctWords / totalWords) * 100).toFixed(2);
+
+}
 // // Complete the test and display results
 // function completeTest() {
 //     clearInterval(interval); // Stop the timer
@@ -165,14 +170,21 @@ function completeTest() {
             correctWords++;
         }
     }
+
+    // // Hide test section (text input and words to type)
+    // testSection.style.display = "none"; 
+
+    // // Show results section and display final results
+    // resultsSection.style.display = "block"; 
+    // results.innerHTML = `Time: ${minutes}m ${seconds}s | WPM: ${wpmElement.innerText} | Accuracy: ${accuracy}%`;
+        // You can store the results in URL parameters for the results page
+    const wpm = wpmElement.innerText;
+    const time = timer; // The total time
+    // const accuracy = calculateAccuracy(); // Your accuracy calculation logic
     const accuracy = ((correctWords / totalWords) * 100).toFixed(2);
 
-    // Hide test section (text input and words to type)
-    testSection.style.display = "none"; 
-
-    // Show results section and display final results
-    resultsSection.style.display = "block"; 
-    results.innerHTML = `Time: ${minutes}m ${seconds}s | WPM: ${wpmElement.innerText} | Accuracy: ${accuracy}%`;
+    // Redirect to the results page with the data
+    window.location.href = `results.html?wpm=${wpm}&time=${time}&accuracy=${accuracy}`;
 }
 
 // Add retry button functionality

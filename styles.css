@@ -1,111 +1,184 @@
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-  }
-  
-  body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #4d4db0;
-  }
-  
-  .container {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
 
-    
-    text-align: center;
-    width: 80%;
-  }
-  
-  .text-box {
-    margin: 20px 0;
-    background-color: #eee;
-    padding: 10px;
-    border-radius: 5px;
-  }
-  
-  #display-text {
-    font-size: 20px;
-    font-weight: bold;
-  }
-  
-  textarea {
-    width: 100%;
-    padding: 10px;
-    font-size: 18px;
-    border: 2px solid #ccc;
-    border-radius: 5px;
-    outline: none;
-  }
-  
-  textarea:focus {
-    border-color: #888;
-  }
-  
-  .correct {
-    color: rgb(0, 176, 176);
-  }
-  
-  .incorrect {
-    color: red;
-  }
-  
-  .controls {
-    margin-top: 30px;
-  }
-  
-  button {
-    padding: 10px 20px;
-    background-color: #20058a;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #218838;
-  }
-/* New button styles for retry button */
-#retry-button {
-  padding: 12px 25px; /* Adjust padding if needed */
-  background-color: #d9534f; /* Different background color for the retry button */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #2b2b8b;
+}
+
+.container {
+  text-align: center;
+  width: 80%;
+}
+
+/* Align text-box and textarea properly */
+.text-box {
+  margin: 20px 0;
+  background-color: #eeeeee00;
+  padding: 0; /* No padding to avoid alignment issues */
+  border-radius: 5px;
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+
+#display-text {
+  font-size: 30px;
+  font-weight: bold;
+  font-family:monospace;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 10px; /* Match textarea padding */
+  z-index: 1;
+  width: 100%;
+  pointer-events: none;
+  white-space: pre-wrap; /* Preserve spaces and line breaks */
+  color: rgb(255, 255, 255);
+  line-height: 1.5; /* Match textarea line-height */
+}
+
+textarea {
+  width: 100%;
+  padding: 10px; /* Match padding with display-text */
+  font-size: 20px; /* Match font-size */
+  font-family: Arial, sans-serif; /* Match font family */
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  background: transparent;
+  color: transparent; /* Hide typed text */
+  caret-color: black; /* Keep cursor visible */
+  z-index: 2; /* Ensure textarea is above display text */
+  position: relative;
+  line-height: 1.5; /* Match line-height to display-text */
+  resize: none; /* Disable resize to keep alignment */
+  height: 100%; /* Ensure height is consistent */
+}
+
+textarea:focus {
+  border-color: transparent;
+}
+
+/* Highlighted text */
+.correct {
+  color: #00ffd5
+}
+
+.incorrect {
+  color: red;
+}
+
+.controls {
+  margin-top: 30px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #20058a;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin-top: 20px; /* Add margin to separate it from other elements */
 }
-  
 
+button:hover {
+  background-color: #218838;
+}
 
-  
-  #timer, #wpm {
-    color: rgb(185, 255, 22);
+/* Retry button */
+#retry-button {
+  position: absolute;
+  top: 490px;
+  left: 650px;
+  padding: 12px 25px;
+  background-color: #5fd7b1;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+}
 
-    font-size: 28px;
-  }
+#retry-button:hover {
+  background-color: #0df43f;
+}
 
-  #corner-image {
-    position: absolute;
-    top: 10px; /* Adjust to move the image vertically */
-    /* right: 200px; Adjust to move the image horizontally */
-    left: 130px;
-    width: 350px; /* Adjust the size as per your need */
-    height: auto; /* Keep aspect ratio */
-  }
+/* Muchas button */
+#muchas-button {
+  position: absolute;
+  top: 490px;
+  left: 800px;
+  padding: 12px 25px;
+  background-color: #e0ca08;
+  color: rgb(0, 0, 0);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+}
 
+#muchas-button:hover {
+  background-color: #f40d0d;
+}
 
-  #result-image {
-    position: absolute;
-    top: 10px; /* Adjust to move the image vertically */
-    /* right: 200px; Adjust to move the image horizontally */
-    left: 130px;
-    width: 650px; /* Adjust the size as per your need */
-    height: auto; /* Keep aspect ratio */
-  }
-  
-  
+#timer, #wpm {
+  color: rgb(185, 255, 22);
+  font-size: 28px;
+}
+
+/* Results Box Styling */
+.results-box {
+  position: absolute;
+  top: 100px;
+  left: 650px;
+  background-color: hsla(0, 0%, 98%, 0);
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+/* Result Item Styling */
+.result-item {
+  font-size: 38px;
+  margin: 30px 0;
+  color: #f7f6fa;
+}
+
+/* Result Value Styling */
+.result-value {
+  font-weight: bold;
+  color: #00ffd5;
+  font-size: 70px;
+}
+
+#corner-image {
+  position: absolute;
+  top: 10px;
+  left: 130px;
+  width: 380px;
+  height: auto;
+}
+
+#top-image {
+  position: absolute;
+  top: 140px;
+  left: 80px;
+  width: 400px;
+  height: auto;
+}
+
+#result-image {
+  position: absolute;
+  top: 10px;
+  left: 130px;
+  width: 650px;
+  height: auto;
+}

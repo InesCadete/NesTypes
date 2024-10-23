@@ -14,29 +14,38 @@
 
     <div class="text-box">
       <p id="display-text"></p>
-      <textarea id="input-overlay" placeholder="Start typing..."></textarea>
-  </div>
+      <textarea id="input-overlay"autofocus></textarea>
+    </div>
   <div id="results" style="display: none;"></div>
   <div>
-      <p>Timer: <span id="timer">0</span>s</p>
-      <p>WPM: <span id="wpm">0</span></p>
+      <p>timer: <span id="timer">0</span>s</p>
+      <p>wpm: <span id="wpm">0</span></p>
       <button id="toggle-mode">Switch to Word Mode</button>
-  </div>
-  
-  <!----------------------------THISSSSSSS------------------->
-
- <!-- Results Section (Hidden initially) -->
-    <div id="results-section" style="display: none;">
-      <div id="results"></div>
-      <img id="result-image" src="final_logo.png" alt="Result Image" style="display: none;">
-      <button id="retry-button">Start New Test</button>
-    </div>
   </div>
 
   <!-- <script src="script.js"></script> -->
-  <script src="script_try.js"></script>
-  <!-- <script src="script_try.js"></script> -->
+  <script>
+    window.onload = function() {
+      const inputOverlay = document.getElementById('input-overlay');
+      
+      // Fallback: If autofocus does not work, apply focus through JS.
+      if (document.activeElement !== inputOverlay) {
+        inputOverlay.focus();
+      }
+    };
+  </script>
+<!-- 
+<script>
+  $("input:text:visible:first").focus();
 
+</script> -->
+
+  <script src="script_save.js"></script>
+
+  
+
+  <!-- <script src="script_try.js"></script> -->
+  </div>
 
 </body>
 </html>

@@ -4,31 +4,59 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Typing Test Results</title>
-  <link rel="stylesheet" href="styles.css"> <!-- Link to your main CSS -->
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="container">
-    <h1>Your Results</h1>
 
-    <!-- Display results dynamically -->
-    <p>Time: <span id="time-result">0</span> minutes</p>
-    <p>Words Per Minute (WPM): <span id="wpm-result">0</span></p>
-    <p>Accuracy: <span id="accuracy-result">0</span>%</p>
+    <img id="top-image" src="results_logo.png" alt="Top Image" />
 
+    <!-- Display results dynamically with custom classes for styling -->
+    <div class="results-box">
+      <p class="result-item">time     :  <span id="time-result" class="result-value"></span></p>
+      <p class="result-item">wpm      :  <span id="wpm-result" class="result-value"></span></p>
+      <p class="result-item">accuracy :  <span id="accuracy-result" class="result-value"></span></p>
+    </div>
     <!-- Next Test Button -->
     <button id="retry-button" onclick="startNewTest()">Next Test</button>
   </div>
 
   <script>
-    // Simulate loading data (replace with actual data fetching later)
-    document.getElementById("time-result").innerText = "2:30";  // Example of 2 min 30 sec
-    document.getElementById("wpm-result").innerText = "75";     // Example of 75 WPM
-    document.getElementById("accuracy-result").innerText = "95"; // Example of 95% accuracy
+
+    // Function to format time as MM:SS
+    function formatTime(seconds) {
+    const minutes = Math.floor(seconds / 60);  // Get the total minutes
+    const remainingSeconds = seconds % 60;     // Get the remaining seconds
+    
+    // Format the time as MM:SS (always 2 digits for seconds)
+    const formattedTime = `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+    return formattedTime;
+}
+
+    // Get the query parameters from the URL
+    const params = new URLSearchParams(window.location.search);
+    const wpm = params.get('wpm');
+    const time = params.get('time');
+    const accuracy = params.get('accuracy');
+
+    const formattedTime = formatTime(time);
+
+    // Update the HTML with the results
+    document.getElementById("wpm-result").innerText = wpm || '0';  // Handle null/undefined
+    // document.getElementById("time-result").innerText = (time ? (time / 60).toFixed(2) : '0'); // Convert time to minutes
+    document.getElementById("time-result").innerText = formattedTime;
+
+    document.getElementById("accuracy-result").innerText = accuracy || '0' + "%";
+
+    // Log to debug if values are being passed correctly
+    // console.log('WPM:', wpm, 'Time:', time, 'Accuracy:', accuracy);
 
     // Function to handle starting a new test
     function startNewTest() {
       window.location.href = "index.html"; // Redirect to the main test page
     }
   </script>
+
+    <button id="muchas-button">Muchas Gracias Afficion</button>
 </body>
 </html>

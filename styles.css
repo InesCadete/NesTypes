@@ -2,7 +2,9 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif;
+  /* font-family: Arial, sans-serif; */
+  font-family: "Centima Mono", monospace; /* Monospace for uniform alignment */
+
 }
 
 body {
@@ -14,9 +16,30 @@ body {
 }
 
 .container {
-  text-align: center;
+  text-align: left;
   width: 80%;
+
 }
+
+
+
+
+
+/* Wrap timer and WPM in a new container to adjust positioning */
+.timer-wpm-container {
+  position: absolute;
+  top: 60%; /* Adjust this value to position lower */
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: rgb(185, 255, 22);
+}
+
+#timer, #wpm {
+  font-size: 28px;
+  margin: 10px;
+}
+
 
 /* Align text-box and textarea properly */
 .text-box {
@@ -29,40 +52,60 @@ body {
   height: auto;
 }
 
+
+
+/* Style display-text to match textarea */
+#display-text, #input-overlay {
+  text-align: left;
+  font-family: "Source Code Pro", monospace; /* Monospace font for uniform width */
+  font-size: 25px; /* Increased font size for larger text */
+  font-weight: bold; /* Make text bold */
+  line-height: 1.5; /* Align line-height */
+}
+
 #display-text {
-  font-size: 30px;
+  font-family: "Source Code Pro", monospace;
+  color: rgb(255, 255, 255);
+  white-space: pre-wrap;
+  padding-left: 10px; /* Adjust to set initial letter alignment */
+}
+
+/* Ensure the textarea aligns correctly with the display text */
+textarea {
+  width: 100%;
+  height: auto;
+  padding: 10px;
+  font-size: 30px; /* Match font size with display-text */
+  font-family: "Source Code Pro", monospace;
   font-weight: bold;
-  font-family:monospace;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: transparent;
+  caret-color: transparent; /* Hide the default caret */
+  z-index: 2;
   position: absolute;
   top: 0;
   left: 0;
-  padding: 10px; /* Match textarea padding */
-  z-index: 1;
-  width: 100%;
-  pointer-events: none;
-  white-space: pre-wrap; /* Preserve spaces and line breaks */
-  color: rgb(255, 255, 255);
-  line-height: 1.5; /* Match textarea line-height */
+  line-height: 1.5;
+  resize: none;
+  cursor: none; /* Hide the default cursor */
 }
 
-textarea {
-  width: 100%;
-  padding: 10px; /* Match padding with display-text */
-  font-size: 20px; /* Match font-size */
-  font-family: Arial, sans-serif; /* Match font family */
-  border: none;
-  border-radius: 5px;
+textarea:focus {
   outline: none;
-  background: transparent;
-  color: transparent; /* Hide typed text */
-  caret-color: black; /* Keep cursor visible */
-  z-index: 2; /* Ensure textarea is above display text */
-  position: relative;
-  line-height: 1.5; /* Match line-height to display-text */
-  resize: none; /* Disable resize to keep alignment */
-  height: 100%; /* Ensure height is consistent */
 }
-
+#custom-cursor {
+  position: absolute;
+  width: 2px; /* Cursor width */
+  height: 1.2em; /* Cursor height */
+  background-color: rgb(200, 0, 255); /* Custom cursor color */
+  z-index: 3;
+  pointer-events: none; /* Ensure the cursor doesn't block clicks */
+  top: 0; /* Align the cursor from the top of the textarea */
+  left: 0; /* Position cursor correctly */
+  transition: left 0.1s; /* Smooth transition for cursor movement */
+}
 textarea:focus {
   border-color: transparent;
 }
@@ -78,6 +121,9 @@ textarea:focus {
 
 .controls {
   margin-top: 30px;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 50px; /* Space between timer and buttons */
 }
 
 button {

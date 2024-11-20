@@ -13,9 +13,10 @@
 
     <!-- Display results dynamically with custom classes for styling -->
     <div class="results-box">
-      <p class="result-item">time     :  <span id="time-result" class="result-value"></span></p>
       <p class="result-item">wpm      :  <span id="wpm-result" class="result-value"></span></p>
       <p class="result-item">accuracy :  <span id="accuracy-result" class="result-value"></span></p>
+      <p class="result-item">time     :  <span id="time-result" class="result-value"></span></p>
+
     </div>
     <!-- Next Test Button -->
     <button id="retry-button" onclick="startNewTest()">Next Test</button>
@@ -46,7 +47,7 @@
     // document.getElementById("time-result").innerText = (time ? (time / 60).toFixed(2) : '0'); // Convert time to minutes
     document.getElementById("time-result").innerText = formattedTime;
 
-    document.getElementById("accuracy-result").innerText = accuracy || '0' + "%";
+    document.getElementById("accuracy-result").innerText = accuracy + "%";
 
     // Log to debug if values are being passed correctly
     // console.log('WPM:', wpm, 'Time:', time, 'Accuracy:', accuracy);

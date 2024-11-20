@@ -1,14 +1,18 @@
-const wordSet = [
-    "apple", "banana", "orange", "strawberry", "grape", "pineapple", 
-    "blueberry", "mango", "pear", "peach", "watermelon", "kiwi", 
-    "melon", "avocado", "plum", "cherry", "coconut", "apricot", 
-    "lime", "lemon"
-  ];
+// const wordSet = [
+//     "apple", "banana", "orange", "strawberry", "grape", "pineapple", 
+//     "blueberry", "mango", "pear", "peach", "watermelon", "kiwi", 
+//     "melon", "avocado", "plum", "cherry", "coconut", "apricot", 
+//     "lime", "lemon"
+//   ];
   
+let wordSet = [];
+
   let startTime;
   let interval;
   let isTimedMode = true;
-  let currentText = generateText(); // Generate text to be typed
+  // let currentText = generateText(); // Generate text to be typed
+  let currentText = ""; // Generate text after words are initialized
+
   let timer = 0;
   let wordCount = 0;
   let correctWords = 0;
@@ -20,17 +24,66 @@ const wordSet = [
   const wpmElement = document.getElementById("wpm");
   const toggleButton = document.getElementById("toggle-mode");
   
+  initializeWords();
+
+
   // Display the generated text
   displayText.innerText = currentText;
+
+
+  const cursor = document.createElement("span");
+  cursor.id = "custom-cursor";
   
-  function generateText(wordCount = 10) {
-    let words = [];
-    for (let i = 0; i < wordCount; i++) {
-      words.push(wordSet[Math.floor(Math.random() * wordSet.length)]);
-    }
-    return words.join(" ") + " ";
+  // Append the cursor to the displayText area
+  displayText.appendChild(cursor);
+  
+  // Position the cursor correctly when the page loads
+  window.addEventListener("load", function() {
+    setTimeout(() => {
+      const inputOverlay = document.getElementById('input-overlay');
+      inputOverlay.focus();  // Focus the textarea to start typing
+      inputOverlay.setSelectionRange(0, 0);  // Set the initial cursor position
+  
+      // Make sure the custom cursor appears at the start
+      cursor.style.left = "10px"; // Adjust as needed to align with the first character
+    }, 10);  // Delay to ensure everything is loaded before focusing
+  });
+
+//-------------------------------------------------------------------------------------
+
+async function fetchWords() {
+  const response = await fetch('https://api.datamuse.com/words?ml=random&v=enwiki');
+  const data = await response.json();
+    return data.map(wordObj => wordObj.word);
+}
+
+async function initializeWords() {
+  wordSet = await fetchWords(); // Populate the wordSet array
+  console.log("Fetched words:", wordSet.slice(0, 100)); // Log a small sample of words
+  currentText = generateText(10); // Generate the initial text to display
+  displayText.innerText = currentText; // Display the generated text
+}
+initializeWords();
+//-------------------------------------------------------------------------------------
+  
+function generateText(wordCount = 10) {
+  // Shuffle the wordSet
+  const shuffledWords = shuffleArray([...wordSet]);
+
+  // Select the first `wordCount` words
+  const selectedWords = shuffledWords.slice(0, wordCount);
+
+  return selectedWords.join(" ") + " ";
+}
+
+// Helper function to shuffle the array
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
   }
-  
+  return array;
+}
   function startTest() {
     inputOverlay.value = ""; // Reset input box
     timer = 0; // Reset timer
@@ -44,52 +97,59 @@ const wordSet = [
     testStarted = true;
   }
   
+
   function handleTyping(event) {
     const typedText = inputOverlay.value;
     let highlightedText = "";
     let isComplete = true;
-  
+
+    // Start the test when the first key is pressed
     const key = event.data;
-
-     // Start the test when the first key is pressed, but keep the first letter in the input
-     if (!testStarted && key && key.trim() !== "") {
+    if (!testStarted && key && key.trim() !== "") {
         testStarted = true;
-        startTest();  // Start the test when the first key is pressed
-        typedText += key;  // Manually add the first key to the typedText
-        inputOverlay.value = typedText; // Ensure the input value includes the first typed letter
+        startTest();
     }
-
 
     // Highlight text
-    // CORRIGIRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR-> para a primeira letra tenho de fazer start test 
-    //-> e tambem 
-
     for (let i = 0; i < currentText.length; i++) {
-
-      if (i < typedText.length) {
-        if (typedText[i] === currentText[i]) {
-          highlightedText += `<span class="correct">${currentText[i]}</span>`;
+        if (i < typedText.length) {
+            if (typedText[i] === currentText[i]) {
+                highlightedText += `<span class="correct">${currentText[i]}</span>`;
+            } else {
+                highlightedText += `<span class="incorrect">${currentText[i]}</span>`;
+                isComplete = false;
+            }
         } else {
-          highlightedText += `<span class="incorrect">${currentText[i]}</span>`;
-          isComplete = false;
+            highlightedText += `<span>${currentText[i]}</span>`;
         }
-      } else {
-        highlightedText += `<span>${currentText[i]}</span>`;
-      }
     }
-  
+
     displayText.innerHTML = highlightedText;
-  
+
+    // Reattach the cursor
+    displayText.appendChild(cursor);
+
+    // Update the custom cursor position
+    const spans = displayText.querySelectorAll("span");
+    let totalWidth = 10; // Start with padding-left offset
+    for (let i = 0; i < typedText.length; i++) {
+        if (spans[i]) {
+            totalWidth += spans[i].getBoundingClientRect().width;
+        }
+    }
+    cursor.style.left = `${totalWidth}px`;
+
+    // Check if the typing is complete
     if (typedText.trim() === currentText.trim() && event.data === " ") {
-      completeTest();
+        completeTest();
     }
-  
+
     if (typedText.length === currentText.length) {
-      completeTest();
+        completeTest();
     }
-  
+
     updateWPM();
-  }
+}
   
   function updateTimer() {
     timer++;

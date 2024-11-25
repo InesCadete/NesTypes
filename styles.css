@@ -43,6 +43,8 @@ body {
 
 /* Align text-box and textarea properly */
 .text-box {
+  position: relative;
+
   margin: 20px 0;
   background-color: #eeeeee00;
   padding: 0; /* No padding to avoid alignment issues */
@@ -141,9 +143,9 @@ button:hover {
 
 /* Retry button */
 #retry-button {
-  position: absolute;
+  /* position: absolute;
   top: 490px;
-  left: 650px;
+  left: 650px; */
   padding: 12px 25px;
   background-color: #5fd7b1;
   color: white;
@@ -227,4 +229,22 @@ button:hover {
   left: 130px;
   width: 650px;
   height: auto;
+}
+
+/* 
+#correct-words-counter {
+  font-size: 20px;
+  color: #00ffd5;
+  margin-bottom: 10px;
+  text-align: left;
+} */
+
+
+#correct-words-counter {
+  position: absolute;
+  top: -30px; /* Adjust to position above the display text */
+  left: 0; /* Align to the left of the text box */
+  font-size: 20px;
+  color: #00ffd5; /* Match your theme */
+  text-align: left;
 }

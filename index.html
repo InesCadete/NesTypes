@@ -13,6 +13,17 @@
     <img id="corner-image" src="final_logo.png" alt="Corner Image" />
 
     <div class="text-box">
+      <!-- <p id="correct-words-counter">Correct Words: 0</p> -->
+
+      <p id="correct-words-counter">0/0</p>
+
+      <!-- <p> /10 </p> -->
+
+      <p id="display-text"></p>
+      <textarea id="input-overlay" autoashfocus></textarea>
+    </div>
+
+    <div class="text-box">
       <p id="display-text"></p>
       <textarea id="input-overlay"autofocus></textarea>
     </div>
@@ -22,7 +33,11 @@
 
       <p>timer: <span id="timer">0</span>s</p>
       <p>wpm: <span id="wpm">0</span></p>
-      <button id="toggle-mode">Switch to Word Mode</button>
+      <!-- <button id="toggle-mode">Switch to Word Mode</button> -->
+      <!-- <button id="retry-button" onclick="startNewTest()">Next Test</button> -->
+      <button id="retry-button" onclick="location.reload()">Next Test</button>
+
+
   </div>
 
   <!-- <script src="script.js"></script> -->

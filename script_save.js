@@ -22,7 +22,7 @@ let wordSet = [];
   const inputOverlay = document.getElementById("input-overlay");
   const timerElement = document.getElementById("timer");
   const wpmElement = document.getElementById("wpm");
-  const toggleButton = document.getElementById("toggle-mode");
+  // const toggleButton = document.getElementById("toggle-mode");
   
   initializeWords();
 
@@ -191,9 +191,41 @@ function shuffleArray(array) {
   // Add event listeners
   inputOverlay.addEventListener("input", handleTyping);
   
-  // Toggle between timed mode and word count mode
-  toggleButton.addEventListener("click", () => {
-    isTimedMode = !isTimedMode;
-    toggleButton.innerText = isTimedMode ? "Switch to Word Mode" : "Switch to Time Mode";
-    startTest();
-  });
+  // // Toggle between timed mode and word count mode
+  // toggleButton.addEventListener("click", () => {
+  //   isTimedMode = !isTimedMode;
+  //   toggleButton.innerText = isTimedMode ? "Switch to Word Mode" : "Switch to Time Mode";
+  //   startTest();
+  // });
+
+//----------------------------------------------------------
+  function updateWPM() {
+    const typedText = inputOverlay.value;
+    const wordsTyped = typedText.trim().split(" ").filter(word => word.length > 0);
+  
+    // Update correct words count
+    correctWords = wordsTyped.reduce((count, word, index) => {
+      if (word === currentText.split(" ")[index]) {
+        return count + 1;
+      }
+      return count;
+    }, 0);
+  
+    // Update the correct words counter
+    // document.getElementById("correct-words-counter").innerText = `Correct Words: ${correctWords}`;
+    const totalWords = currentText.trim().split(" ").length;
+    document.getElementById("correct-words-counter").innerText = `${correctWords}/${totalWords}`;
+    
+
+  
+    // Calculate WPM based on correct words and time
+    const minutes = timer / 60;
+    const wpm = minutes > 0 ? Math.floor(correctWords / minutes) : 0;
+  
+    console.log("WPM: ", wpm); // Add logging to check if WPM is being calculated
+    wpmElement.innerText = wpm; // Update WPM display
+  }
+  
+
+  // document.getElementById("correct-words-counter").innerText = `Correct Words: ${correctWords}`;
+

@@ -140,7 +140,7 @@ button {
 button:hover {
   background-color: #218838;
 }
-
+/* -------------------------------------------*/
 /* Retry button */
 #retry-button {
   /* position: absolute;
@@ -158,23 +158,23 @@ button:hover {
 #retry-button:hover {
   background-color: #0df43f;
 }
-
-/* Muchas button */
-#muchas-button {
+/*------------------------------------------*/
+/* Retry button */
+#retry-button2 {
   position: absolute;
   top: 490px;
-  left: 800px;
+  left: 650px; 
   padding: 12px 25px;
-  background-color: #e0ca08;
-  color: rgb(0, 0, 0);
+  background-color: #5fd7b1;
+  color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   margin-top: 20px;
 }
 
-#muchas-button:hover {
-  background-color: #f40d0d;
+#retry-button2:hover {
+  background-color: #0df43f;
 }
 
 #timer, #wpm {
